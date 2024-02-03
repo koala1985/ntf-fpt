@@ -11,9 +11,9 @@ app.use(express.json());
 let subscriptionData = null;
 
 webpush.setVapidDetails(
-  `mailto:${process.env.VAPID_MAILTO}`,
-  process.env.VAPID_PUBLIC_KEY,
-  process.env.VAPID_PRIVATE_KEY
+  `mailto:feixia85@hotmail.com`,
+  'BJdXFq_8qyyVWslyYOHCuUcwtzOoeHb5_VDljfAI7rRzJVAI8fJGEOBaKbkiDD8Vb9UktMR5NjjvOGaQEtIT_5A',
+  'Lv8HfI28Ii3SI6fX7OLXt_2dPOevQ8OipAJ4kh-w5h8'
 )
 
 app.get('/send-notification', async (req, res) => {

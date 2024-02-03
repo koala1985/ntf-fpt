@@ -20,18 +20,18 @@ async function run() {
     button.addEventListener("click", async () => {
       // Triggers popup to request access to send notifications
       const result = await window.Notification.requestPermission();
-
+      console.log("ask");
       // If the user rejects the permission result will be "denied"
       if (result === "granted") {
         const subscription = await registration.pushManager.subscribe({
           // TODO: Replace with your public vapid key
           applicationServerKey:
-            "BFkG2HKrQ3BYTS_4z1S1pRwNoX4vvQhCwi3q9Hum7nQ8p9FHU3nLAjzmGWet_63jkLD2XXFp2rgranujXvCJd4k",
+            "BJdXFq_8qyyVWslyYOHCuUcwtzOoeHb5_VDljfAI7rRzJVAI8fJGEOBaKbkiDD8Vb9UktMR5NjjvOGaQEtIT_5A",
           userVisibleOnly: true,
         });
-
+console.log("fetch");
         await fetch("/save-subscription", {
-          method: "post",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
