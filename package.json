@@ -2,7 +2,8 @@
   "scripts": {
     "start": "node server.mjs",
     "dev": "node --watch server.mjs",
-    "build": "webpack"
+    "build": "webpack",
+    "prod": "node build/final.js"
   },
   "dependencies": {
     "dotenv": "^16.0.3",

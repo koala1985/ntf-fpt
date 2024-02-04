@@ -17,8 +17,5 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    extensions: ['.tsx', '.jsx', '.js', '.ts'],
-  },
   target: 'node',
 };
