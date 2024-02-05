@@ -7,23 +7,38 @@ async function run() {
     }
   );
 
+  let subscription;
   const button = document.getElementById("subscribe");
 
+  const usButton = document.getElementById("unsubscribe");
+
   const areNotificationsGranted = window.Notification.permission === "granted";
+
   if (areNotificationsGranted) {
     button.innerText = "Send Notification";
-
     button.addEventListener("click", async () => {
       await fetch("/send-notification");
     });
+
+    usButton.innerText = "Unsubscribe";
+    usButton.addEventListener("click", async () => {
+      subscription = await registration.pushManager.getSubscription();
+      await subscription.unsubscribe();
+    });
+
   } else {
+    usButton.innerText = "N/A";
+    usButton.addEventListener("click", async () => {
+    });
+    
     button.addEventListener("click", async () => {
       // Triggers popup to request access to send notifications
       const result = await window.Notification.requestPermission();
       console.log("ask");
+
       // If the user rejects the permission result will be "denied"
       if (result === "granted") {
-        const subscription = await registration.pushManager.subscribe({
+          subscription = await registration.pushManager.subscribe({
           // TODO: Replace with your public vapid key
           applicationServerKey:
             "BJdXFq_8qyyVWslyYOHCuUcwtzOoeHb5_VDljfAI7rRzJVAI8fJGEOBaKbkiDD8Vb9UktMR5NjjvOGaQEtIT_5A",
@@ -41,7 +56,11 @@ console.log("fetch");
         window.location.reload();
       }
     });
+
+
   }
+
+
 }
 
 run();
