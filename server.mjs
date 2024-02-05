@@ -37,6 +37,26 @@ app.get('/send-notification', async (req, res) => {
 
 app.post("/save-subscription", async (req, res) => {
   subscriptionData = req.body;
+
+  res.sendStatus(200);
+});
+
+
+app.post("/save-subscriptionc", async (req, res) => {
+  subscriptionData = req.body;
+
+  const urlEncoded = encodeURIComponent(subscriptionData)
+
+
+
+const requestOptions = {
+  method: 'POST'
+};
+await fetch(('https://webapi20240104151128.azurewebsites.net/FSubscription?alias='+'c'+'&subscription='+ urlEncoded), requestOptions)
+  .then(response => 
+    response.json()).catch(error => console.error(error));
+
+
   res.sendStatus(200);
 });
 
