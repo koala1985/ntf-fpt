@@ -35,6 +35,33 @@ app.get('/send-notification', async (req, res) => {
   }
 })
 
+app.get('/send-notificationc', async (req, res) => {
+
+  await fetch('https://webapi20240104151128.azurewebsites.net/FSubscription?alias=c')
+  .then(response => response.json())
+  .then(data => {
+    
+    data.forEach(element => {
+
+
+      try {
+         webpush.sendNotification(element.subscription, JSON.stringify({
+          title: "Hello World",
+          body: "Notification sent from backend"
+        }));
+        res.sendStatus(200);
+      } catch(err) {
+        console.error(err);
+        res.sendStatus(500);
+      }
+    });
+  
+  
+  }).catch(error => console.error(error));
+
+})
+
+
 app.post("/save-subscription", async (req, res) => {
   subscriptionData = req.body;
 

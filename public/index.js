@@ -11,6 +11,11 @@ async function run() {
   const button = document.getElementById("subscribe");
 
   const usButton = document.getElementById("unsubscribe");
+  const sendcButton = document.getElementById("sendc");
+  sendcButton.innerText = "sendc";
+  sendcButton.addEventListener("click", async () => {
+    await fetch("/send-notificationc");
+  });
 
   const areNotificationsGranted = window.Notification.permission === "granted";
 
