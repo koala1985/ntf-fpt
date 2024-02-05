@@ -45,7 +45,7 @@ app.post("/save-subscription", async (req, res) => {
 app.post("/save-subscriptionc", async (req, res) => {
   subscriptionData = req.body;
 
-  const urlEncoded = encodeURIComponent(subscriptionData)
+  const urlEncoded = encodeURIComponent(JSON.stringify(subscriptionData));
 
 
 
