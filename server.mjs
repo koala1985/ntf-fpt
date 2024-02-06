@@ -5,13 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const cors = require('cors')
 
-let corsOptions = {
-  origin : ['https://feilabfpt.azurewebsites.net'],
-}
-
-app.use(cors()); 
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -28,7 +22,7 @@ webpush.setVapidDetails(
   'Lv8HfI28Ii3SI6fX7OLXt_2dPOevQ8OipAJ4kh-w5h8'
 )
 
-app.get('/send-notification', cors(corsOptions), async (req, res) => {
+app.get('/send-notification', async (req, res) => {
   try {
     await webpush.sendNotification(subscriptionData, JSON.stringify({
       title: "Hello World",
@@ -41,7 +35,7 @@ app.get('/send-notification', cors(corsOptions), async (req, res) => {
   }
 })
 
-app.get('/send-notificationa', cors(corsOptions), async (req, res) => {
+app.get('/send-notificationa', async (req, res) => {
 
   await fetch('https://webapi20240104151128.azurewebsites.net/FSubscription?alias=a')
   .then(response => response.json())
@@ -69,7 +63,7 @@ app.get('/send-notificationa', cors(corsOptions), async (req, res) => {
 
 })
 
-app.get('/send-notificationc', cors(corsOptions), async (req, res) => {
+app.get('/send-notificationc', async (req, res) => {
 
   await fetch('https://webapi20240104151128.azurewebsites.net/FSubscription?alias=c')
   .then(response => response.json())
@@ -98,13 +92,13 @@ app.get('/send-notificationc', cors(corsOptions), async (req, res) => {
 })
 
 
-app.post("/save-subscription", cors(corsOptions), async (req, res) => {
+app.post("/save-subscription", async (req, res) => {
   subscriptionData = req.body;
 
   res.sendStatus(200);
 });
 
-app.post("/save-subscriptiona", cors(corsOptions), async (req, res) => {
+app.post("/save-subscriptiona", async (req, res) => {
   subscriptionData = req.body;
 
   const urlEncoded = encodeURIComponent(JSON.stringify(subscriptionData));
@@ -118,7 +112,7 @@ app.post("/save-subscriptiona", cors(corsOptions), async (req, res) => {
 });
 
 
-app.post("/save-subscriptionc", cors(corsOptions), async (req, res) => {
+app.post("/save-subscriptionc", async (req, res) => {
   subscriptionData = req.body;
 
   const urlEncoded = encodeURIComponent(JSON.stringify(subscriptionData));
