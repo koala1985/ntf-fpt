@@ -25,7 +25,7 @@ webpush.setVapidDetails(
 app.get('/send-notification', async (req, res) => {
   try {
     await webpush.sendNotification(subscriptionData, JSON.stringify({
-      title: "Hello World",
+      title: "Hello N World",
       body: "Notification sent from backend"
     }));
     res.sendStatus(200);
@@ -47,7 +47,7 @@ app.get('/send-notificationa', async (req, res) => {
         let pushSubscription = JSON.parse(element.subscription)
         //pushSubscription = element.subscription;
          webpush.sendNotification(pushSubscription, JSON.stringify({
-          title: "Hello World",
+          title: "Hello A World",
           body: "Notification sent from backend"
         }));
         res.sendStatus(200);
@@ -75,7 +75,7 @@ app.get('/send-notificationc', async (req, res) => {
         let pushSubscription = JSON.parse(element.subscription)
         //pushSubscription = element.subscription;
          webpush.sendNotification(pushSubscription, JSON.stringify({
-          title: "Hello World",
+          title: "Hello C World",
           body: "Notification sent from backend"
         }));
         res.sendStatus(200);
