@@ -43,7 +43,7 @@ app.get('/send-notificationc', async (req, res) => {
     
     data.forEach(element => {
 
-
+console.log("element.subscription");
       try {
          webpush.sendNotification(element.subscription, JSON.stringify({
           title: "Hello World",
