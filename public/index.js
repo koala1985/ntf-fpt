@@ -17,6 +17,12 @@ async function run() {
     await fetch("/send-notificationc");
   });
 
+  const sendaButton = document.getElementById("senda");
+  sendaButton.innerText = "senda";
+  sendaButton.addEventListener("click", async () => {
+    await fetch("/send-notificationa");
+  });
+
   const areNotificationsGranted = window.Notification.permission === "granted";
 
   if (areNotificationsGranted) {
