@@ -46,10 +46,10 @@ app.get('/send-notificationc', async (req, res) => {
       try {
         
         let pushSubscription = {
-          endpoint: element?.subscription?.endpoint,
+          endpoint: undefined,
           keys: {
-            auth: element?.subscription?.keys?.auth,
-            p256dh: element?.subscription?.keys?.p256dh,
+            auth: undefined,
+            p256dh: undefined,
           },
         };
         pushSubscription = element.subscription;
