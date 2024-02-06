@@ -109,9 +109,9 @@ app.post("/save-subscriptiona", cors(corsOptions), async (req, res) => {
 
   const urlEncoded = encodeURIComponent(JSON.stringify(subscriptionData));
   const requestOptions = {
-  method: 'POST'
-};
-await fetch(('https://webapi20240104151128.azurewebsites.net/FSubscription?alias='+'a'+'&subscription='+ urlEncoded), requestOptions)
+    method: 'POST'
+  };
+  await fetch(('https://webapi20240104151128.azurewebsites.net/FSubscription?alias='+'a'+'&subscription='+ urlEncoded), requestOptions)
   .then(response => 
     response.json()).catch(error => console.error(error));
   res.sendStatus(200);
