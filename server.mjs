@@ -8,7 +8,7 @@ const app = express();
 const cors = require('cors')
 
 let corsOptions = {
-  origin : ['http://localhost:3000', 'https://feilabfpt.azurewebsites.net'],
+  origin : ['https://feilabfpt.azurewebsites.net'],
 }
 
 app.use(cors()); 
