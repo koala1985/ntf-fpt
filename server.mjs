@@ -43,17 +43,16 @@ app.get('/send-notificationc', async (req, res) => {
     
     data.forEach(element => {
 
-console.log("element.subscription");
       try {
         
         let pushSubscription = {
-          endpoint: element.subscription.endpoint,
+          endpoint: element?.subscription?.endpoint,
           keys: {
-            auth: element.subscription.keys.auth,
-            p256dh: element.subscription.keys.p256dh,
+            auth: element?.subscription?.keys?.auth,
+            p256dh: element?.subscription?.keys?.p256dh,
           },
         };
-
+        pushSubscription = element.subscription;
          webpush.sendNotification(pushSubscription, JSON.stringify({
           title: "Hello World",
           body: "Notification sent from backend"
