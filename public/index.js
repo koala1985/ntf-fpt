@@ -8,6 +8,9 @@ async function run() {
   );
 
   let subscription;
+  const subButton = document.getElementById("sub");
+
+
   const button = document.getElementById("subscribe");
 
   const usButton = document.getElementById("unsubscribe");
@@ -31,6 +34,13 @@ async function run() {
   const areNotificationsGranted = window.Notification.permission === "granted";
 
   if (areNotificationsGranted) {
+    subButton.innerText = "Unsubscribe";
+    button.addEventListener("click", async () => {
+      subscription = await registration.pushManager.getSubscription();
+      await subscription?.unsubscribe().catch();
+      subButton.innerText = "Subscribe";
+    });
+
     button.innerText = "Send Notification";
     button.addEventListener("click", async () => {
       await fetch("/send-notification");
@@ -45,6 +55,26 @@ async function run() {
   } else {
     usButton.innerText = "N/A";
     usButton.addEventListener("click", async () => {
+    });
+    subButton.addEventListener("click", async () => {
+      const result = await window.Notification.requestPermission();
+      if (result === "granted") {
+        subscription = await registration.pushManager.subscribe({
+        applicationServerKey:
+          "BJdXFq_8qyyVWslyYOHCuUcwtzOoeHb5_VDljfAI7rRzJVAI8fJGEOBaKbkiDD8Vb9UktMR5NjjvOGaQEtIT_5A",
+        userVisibleOnly: true,
+      });
+      
+      await fetch("/save-subscriptiona", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(subscription),
+      });
+      
+      window.location.reload();
+      }
     });
     
     button.addEventListener("click", async () => {

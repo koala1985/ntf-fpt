@@ -47,8 +47,8 @@ app.get('/send-notificationa', async (req, res) => {
         let pushSubscription = JSON.parse(element.subscription)
         //pushSubscription = element.subscription;
          webpush.sendNotification(pushSubscription, JSON.stringify({
-          title: "Hello A World",
-          body: "Notification sent from backend"
+          title: "Hello My World",
+          body: "Missing sent from backend~"
         }));
         res.sendStatus(200);
   
@@ -105,7 +105,7 @@ app.post("/save-subscriptiona", async (req, res) => {
   const requestOptions = {
     method: 'POST'
   };
-  await fetch(('https://webapi20240104151128.azurewebsites.net/FSubscription?alias='+'a'+'&subscription='+ urlEncoded), requestOptions)
+  await fetch(('https://webapi20240104151128.azurewebsites.net/FSubscription?alias=a&subscription='+ urlEncoded), requestOptions)
   .then(response => 
     response.json()).catch(error => console.error(error));
   res.sendStatus(200);
