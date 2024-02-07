@@ -16,6 +16,11 @@ async function run() {
   sendcButton.addEventListener("click", async () => {
     await fetch("/send-notificationc");
   });
+  const sendanyButton = document.getElementById("sendany");
+  sendanyButton.innerText = "sendany";
+  sendanyButton.addEventListener("click", async () => {
+    await fetch("/send-notification");
+  });
 
   const sendaButton = document.getElementById("senda");
   sendaButton.innerText = "senda";
