@@ -8,54 +8,20 @@ async function run() {
   );
 
   let subscription;
+  let isRegistered = false;
   const subButton = document.getElementById("sub");
-
-
-  const button = document.getElementById("subscribe");
-
-  const usButton = document.getElementById("unsubscribe");
-  const sendcButton = document.getElementById("sendc");
-  sendcButton.innerText = "sendc";
-  sendcButton.addEventListener("click", async () => {
-    await fetch("/send-notificationc");
-  });
-  const sendanyButton = document.getElementById("sendany");
-  sendanyButton.innerText = "sendany";
-  sendanyButton.addEventListener("click", async () => {
-    await fetch("/send-notification");
-  });
-
-  const sendaButton = document.getElementById("senda");
-  sendaButton.innerText = "senda";
-  sendaButton.addEventListener("click", async () => {
-    await fetch("/send-notificationa");
-  });
 
   const areNotificationsGranted = window.Notification.permission === "granted";
 
-  if (areNotificationsGranted) {
+  if (areNotificationsGranted && isRegistered === true) {
     subButton.innerText = "Unsubscribe";
     button.addEventListener("click", async () => {
       subscription = await registration.pushManager.getSubscription();
       await subscription?.unsubscribe().catch();
-      subButton.innerText = "Subscribe";
+      isRegistered = false;
+      window.location.reload();
     });
-
-    button.innerText = "Send Notification";
-    button.addEventListener("click", async () => {
-      await fetch("/send-notification");
-    });
-
-    usButton.innerText = "Unsubscribe";
-    usButton.addEventListener("click", async () => {
-      subscription = await registration.pushManager.getSubscription();
-      await subscription.unsubscribe();
-    });
-
   } else {
-    usButton.innerText = "N/A";
-    usButton.addEventListener("click", async () => {
-    });
     subButton.addEventListener("click", async () => {
       const result = await window.Notification.requestPermission();
       if (result === "granted") {
@@ -72,11 +38,11 @@ async function run() {
         },
         body: JSON.stringify(subscription),
       });
-      
+      isRegistered = true;
       window.location.reload();
       }
     });
-    
+
     button.addEventListener("click", async () => {
       // Triggers popup to request access to send notifications
       const result = await window.Notification.requestPermission();
