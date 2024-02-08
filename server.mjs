@@ -63,7 +63,7 @@ app.get('/send-notificationa', async (req, res) => {
 
 })
 
-app.get('/send-notificationq', async (req, res) => {
+app.post('/send-notificationq', async (req, res) => {
   const nt = req.body;
   await fetch('https://webapi20240104151128.azurewebsites.net/FSubscription?alias=a')
   .then(response => response.json())
