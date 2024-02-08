@@ -63,6 +63,34 @@ app.get('/send-notificationa', async (req, res) => {
 
 })
 
+app.get('/send-notificationq', async (req, res) => {
+  const nt = req.body;
+  await fetch('https://webapi20240104151128.azurewebsites.net/FSubscription?alias=a')
+  .then(response => response.json())
+  .then(data => {
+    
+    data.forEach(element => {
+      try {
+        
+        let pushSubscription = JSON.parse(element.subscription)
+        //pushSubscription = element.subscription;
+         webpush.sendNotification(pushSubscription, JSON.stringify({
+          title: nt.title,
+          body: nt.content,
+        }));
+        res.sendStatus(200);
+  
+      } catch(err) {
+        console.error(err);
+        res.sendStatus(500);
+      }
+
+    });
+  
+  }).catch(error => console.error(error));
+
+})
+
 app.get('/send-notificationc', async (req, res) => {
 
   await fetch('https://webapi20240104151128.azurewebsites.net/FSubscription?alias=c')
